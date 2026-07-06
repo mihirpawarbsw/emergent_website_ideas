@@ -166,7 +166,179 @@
      Data storm (CTA)
      ============================== */
   .storm{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
-  .storm canvas{ position:absolute; inset:0; width:100%; height:100%; opacity:.7; }
+  .storm canvas{ position:absolute; inset:0; width:100%; height:100%; opacity:.45; }
+
+  /* ==============================
+     Scroll progress bar
+     ============================== */
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:2px; width:0%; z-index:200;
+    background:linear-gradient(90deg, var(--electric), var(--cyan), var(--aqua), var(--ice));
+    box-shadow:0 0 12px rgba(28,199,247,.6);
+    transition:width .08s linear;
+  }
+
+  /* ==============================
+     Cursor spotlight (hero)
+     ============================== */
+  .spotlight{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(300px 300px at var(--mx,50%) var(--my,50%), rgba(145,239,236,.08), transparent 60%);
+    transition:background .1s linear;
+    mix-blend-mode:screen;
+  }
+
+  /* ==============================
+     Trust strip
+     ============================== */
+  .trust{
+    padding:36px 0; border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, transparent, rgba(16,18,43,.35));
+  }
+  .trust .wrap{ display:flex; flex-direction:column; gap:22px; align-items:center; }
+  .trust .k{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.28em; color:var(--dim); text-transform:uppercase; }
+  .trust-row{ display:flex; align-items:center; justify-content:center; gap:56px; flex-wrap:wrap; opacity:.75; }
+  .trust-logo{ display:flex; align-items:center; gap:10px; color:var(--muted); font-family:var(--f-serif); font-size:20px; letter-spacing:-.01em;
+    transition:color .3s ease, transform .3s ease; }
+  .trust-logo:hover{ color:var(--ice); transform:translateY(-1px); }
+  .trust-logo svg{ width:22px; height:22px; }
+
+  /* ==============================
+     Beyond Chat comparison
+     ============================== */
+  .beyond{ padding:120px 0; border-top:1px solid var(--line); position:relative; overflow:hidden; }
+  .beyond .compare{
+    display:grid; grid-template-columns: 1fr auto 1fr; gap:0; margin-top:56px; align-items:stretch;
+    border:1px solid var(--line); border-radius:var(--r-xl); overflow:hidden;
+    background:linear-gradient(180deg, rgba(16,18,43,.5), rgba(10,11,30,.3));
+  }
+  .beyond .col{ padding:40px 36px; position:relative; }
+  .beyond .col.old{ background:rgba(5,6,15,.45); }
+  .beyond .col.new{ background:radial-gradient(120% 100% at 100% 0%, rgba(66,66,195,.16), transparent 60%), rgba(16,18,43,.5); }
+  .beyond .divider{
+    width:1px; background:linear-gradient(180deg, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent);
+    position:relative;
+  }
+  .beyond .divider::after{
+    content:"VS"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    font-family:var(--f-mono); font-size:11px; letter-spacing:.28em; color:var(--ice);
+    padding:8px 12px; border-radius:999px; border:1px solid var(--line-strong); background:var(--ink-1);
+  }
+  .beyond h4.col-title{ font-family:var(--f-serif); font-size:26px; letter-spacing:-.01em; margin-bottom:20px; }
+  .beyond .col.old h4.col-title{ color:var(--dim); }
+  .beyond .col.new h4.col-title{ color:var(--ice); }
+  .beyond .col .tag{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:8px; display:inline-block; }
+  .beyond ul.checks{ list-style:none; padding:0; margin:20px 0 0; display:grid; gap:14px; }
+  .beyond ul.checks li{ display:grid; grid-template-columns:22px 1fr; gap:12px; align-items:start; font-size:14.5px; }
+  .beyond .col.old ul.checks li{ color:var(--dim); }
+  .beyond .col.old ul.checks li::before{
+    content:""; width:14px; height:14px; margin-top:2px; border-radius:50%;
+    border:1px solid rgba(154,160,199,.35); background:transparent;
+  }
+  .beyond .col.new ul.checks li{ color:#DDE0F5; }
+  .beyond .col.new ul.checks li::before{
+    content:""; width:14px; height:14px; margin-top:2px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--ice), var(--aqua) 60%, var(--teal));
+    box-shadow:0 0 12px rgba(145,239,236,.5);
+  }
+  .beyond .col .demo{
+    margin-top:26px; padding:18px; border-radius:14px; border:1px solid var(--line); background:rgba(5,6,15,.55);
+    font-family:var(--f-mono); font-size:12px; color:var(--muted); min-height:150px;
+  }
+  .beyond .col.old .demo .line{ opacity:.55; }
+  .beyond .demo .prompt{ color:var(--ice); }
+  .beyond .demo .out{ color:#DDE0F5; margin-top:8px; }
+  .beyond .demo .cite{ color:var(--aqua); font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; margin-top:8px; }
+  .beyond .demo .badges{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .beyond .demo .badges span{
+    font-size:9.5px; letter-spacing:.16em; text-transform:uppercase; padding:3px 7px; border-radius:999px;
+    border:1px solid var(--line-strong); color:var(--ice); background:rgba(145,239,236,.05);
+  }
+
+  /* ==============================
+     Testimonial
+     ============================== */
+  .testimonial{ padding:140px 0; border-top:1px solid var(--line); position:relative; overflow:hidden; }
+  .testimonial::before{
+    content:""; position:absolute; inset:0; z-index:0;
+    background:
+      radial-gradient(50% 60% at 15% 30%, rgba(66,66,195,.15), transparent 60%),
+      radial-gradient(40% 55% at 90% 80%, rgba(28,199,247,.12), transparent 60%);
+  }
+  .testimonial .wrap{ position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .testimonial .quote-mark{
+    font-family:var(--f-serif); font-size:180px; line-height:.7; color:var(--ice); opacity:.25; font-style:italic;
+  }
+  .testimonial blockquote{
+    margin:0; font-family:var(--f-serif); font-size:clamp(26px, 2.8vw, 40px); line-height:1.15; letter-spacing:-.015em;
+    font-weight:300;
+  }
+  .testimonial blockquote em{ color:var(--ice); font-style:italic; }
+  .testimonial .who{ margin-top:32px; display:flex; align-items:center; gap:16px; }
+  .testimonial .avatar{
+    width:52px; height:52px; border-radius:50%;
+    background:conic-gradient(from 180deg, var(--electric), var(--cyan), var(--aqua), var(--ice), var(--electric));
+    border:1px solid var(--line-strong); box-shadow:0 6px 20px -6px rgba(28,199,247,.5);
+  }
+  .testimonial .name{ font-family:var(--f-serif); font-size:19px; }
+  .testimonial .role{ font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-top:2px; }
+  .testimonial .metrics{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .testimonial .metric{
+    padding:26px; border:1px solid var(--line); border-radius:var(--r-lg);
+    background:linear-gradient(180deg, rgba(16,18,43,.7), rgba(10,11,30,.4));
+    transition:transform .5s ease, border-color .5s ease;
+  }
+  .testimonial .metric:hover{ transform:translateY(-3px); border-color:var(--line-strong); }
+  .testimonial .metric .n{ font-family:var(--f-serif); font-size:52px; letter-spacing:-.02em; line-height:1; color:var(--ice); }
+  .testimonial .metric .l{ font-family:var(--f-mono); font-size:10.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-top:10px; }
+  .testimonial .metric .d{ font-size:13px; color:var(--muted); margin-top:8px; }
+
+  /* ==============================
+     FAQ
+     ============================== */
+  .faq{ padding:120px 0; border-top:1px solid var(--line); }
+  .faq .list{ margin-top:40px; border-top:1px solid var(--line); }
+  .faq details{ border-bottom:1px solid var(--line); padding:22px 0; }
+  .faq summary{
+    list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:24px;
+    font-family:var(--f-serif); font-size:22px; letter-spacing:-.01em; color:var(--text);
+    transition:color .3s ease;
+  }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary:hover{ color:var(--ice); }
+  .faq summary .plus{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--line-strong); display:grid; place-items:center; flex-shrink:0;
+    color:var(--ice); transition:transform .4s ease, background .4s ease;
+    font-family:var(--f-mono); font-size:16px;
+  }
+  .faq details[open] summary .plus{ transform:rotate(45deg); background:rgba(145,239,236,.08); }
+  .faq .a{ margin-top:14px; color:var(--muted); font-size:15px; max-width:820px; }
+
+  /* ==============================
+     Card tilt (capabilities)
+     ============================== */
+  .cap{ transform-style:preserve-3d; will-change:transform; }
+  .cap .cap-glow{
+    position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .5s ease;
+    background:radial-gradient(180px 180px at var(--gx,50%) var(--gy,50%), rgba(145,239,236,.14), transparent 60%);
+  }
+  .cap:hover .cap-glow{ opacity:1; }
+  .cap > *{ position:relative; z-index:1; }
+
+  /* Magnetic button hint */
+  .btn{ will-change:transform; }
+
+  /* Responsive additions */
+  @media (max-width: 1080px){
+    .beyond .compare{ grid-template-columns:1fr; }
+    .beyond .divider{ height:1px; width:100%; background:linear-gradient(90deg, transparent, var(--line-strong), transparent); }
+    .beyond .divider::after{ position:relative; top:auto; left:auto; transform:none; display:inline-block; margin:14px auto; }
+    .testimonial .wrap{ grid-template-columns:1fr; gap:40px; }
+  }
+  @media (max-width: 680px){
+    .trust-row{ gap:28px; }
+    .testimonial .metrics{ grid-template-columns:1fr; }
+  }
 
   /* ==============================
      Hero
@@ -427,6 +599,8 @@
 </head>
 <body>
 
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- ================= NAV ================= -->
 <nav class="nav" data-testid="site-nav">
   <div class="nav-inner">
@@ -438,11 +612,11 @@
       </div>
     </a>
     <div class="nav-links">
+      <a href="#beyond" data-testid="nav-beyond">Beyond Chat</a>
       <a href="#workflow" data-testid="nav-workflow">Workflow</a>
       <a href="#capabilities" data-testid="nav-capabilities">Capabilities</a>
       <a href="#pipeline" data-testid="nav-pipeline">Pipeline</a>
-      <a href="#users" data-testid="nav-users">Built for</a>
-      <a href="#benefits" data-testid="nav-benefits">Benefits</a>
+      <a href="#faq" data-testid="nav-faq">FAQ</a>
     </div>
     <button class="btn primary" data-open-modal data-testid="nav-cta">
       Request Demo
@@ -455,6 +629,7 @@
 <header id="top" class="hero">
   <!-- AI Brain neural background -->
   <div class="brain-bg" aria-hidden="true"><canvas id="brain-canvas"></canvas></div>
+  <div class="spotlight" id="hero-spotlight" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
       <span class="eyebrow"><span class="dot"></span>AI Document Intelligence Suite · v1</span>
@@ -508,6 +683,16 @@
   </div>
 </div>
 
+<!-- ================= TRUST STRIP ================= -->
+<section class="trust" aria-label="Trusted by">
+  <div class="wrap">
+    <div class="k">Trusted across knowledge-intensive enterprises</div>
+    <div class="trust-row" id="trust-row">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
 <!-- ================= VISION ================= -->
 <section class="vision" id="vision">
   <div class="wrap vision-inner">
@@ -531,6 +716,66 @@
         <div class="stat"><div class="n">10×</div><div class="l">Faster review</div></div>
         <div class="stat"><div class="n">360°</div><div class="l">Knowledge coverage</div></div>
         <div class="stat"><div class="n">0</div><div class="l">Silos remaining</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEYOND CHAT ================= -->
+<section class="beyond" id="beyond">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span>Beyond Chat</span>
+        <h2 style="margin-top:18px;">Why a chatbot <em style="font-style:italic; color:var(--ice); font-weight:300;">isn't enough.</em></h2>
+      </div>
+      <p class="reveal">
+        Traditional AI chat answers isolated questions from a single document. Nexora orchestrates an entire
+        intelligence layer — connecting documents, extracting decisions, and producing outputs your leadership can act on.
+      </p>
+    </div>
+
+    <div class="compare reveal">
+      <div class="col old">
+        <span class="tag">The old way</span>
+        <h4 class="col-title">Traditional Document Chatbots</h4>
+        <ul class="checks">
+          <li>Answers isolated questions from one file at a time</li>
+          <li>No cross-document reasoning or contradiction detection</li>
+          <li>No entity or relationship extraction</li>
+          <li>No timeline, cluster, or knowledge-graph output</li>
+          <li>No executive-ready reports or action tracking</li>
+          <li>No external validation with live web intelligence</li>
+        </ul>
+        <div class="demo">
+          <div class="line prompt">▸ user: summarize this pdf</div>
+          <div class="line out">"Here is a summary of the document contents…"</div>
+          <div class="line prompt" style="margin-top:8px;">▸ user: what about the others?</div>
+          <div class="line out">"I can only see one document."</div>
+        </div>
+      </div>
+
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="col new">
+        <span class="tag">The Nexora way</span>
+        <h4 class="col-title">AI Document Intelligence Suite</h4>
+        <ul class="checks">
+          <li>Reasons across entire document collections simultaneously</li>
+          <li>Detects overlaps, contradictions, and merges scattered knowledge</li>
+          <li>Extracts entities, concepts, events, actions, and decisions</li>
+          <li>Auto-generates knowledge graphs, timelines, and clusters</li>
+          <li>Produces executive reports with cited evidence</li>
+          <li>Enriches internal knowledge with live external intelligence</li>
+        </ul>
+        <div class="demo">
+          <div class="prompt">▸ user: how has our compliance stance shifted across Q1–Q3 reports?</div>
+          <div class="out">Q1 emphasized regional caution; Q3 shows +2.4% margin uplift with tightened vendor SLA and 3 open actions.</div>
+          <div class="cite">Cited · report-q1 p.14 · memo-08 · report-q3 p.31</div>
+          <div class="badges">
+            <span>Graph</span><span>Timeline</span><span>Actions</span><span>Report</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -994,6 +1239,95 @@
   </div>
 </section>
 
+<!-- ================= TESTIMONIAL ================= -->
+<section class="testimonial" id="testimonial">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        We stopped searching. We started <em>understanding.</em> Nexora reads across our thirty-year
+        archive the way our best analyst wishes they could — and then hands us a report the executive
+        team can act on the same afternoon.
+      </blockquote>
+      <div class="who">
+        <div class="avatar" aria-hidden="true"></div>
+        <div>
+          <div class="name">Priya Iyer</div>
+          <div class="role">Head of Knowledge Strategy · Global Enterprise</div>
+        </div>
+      </div>
+    </div>
+    <div class="metrics reveal">
+      <div class="metric">
+        <div class="n" data-count="94" data-suffix="%">0%</div>
+        <div class="l">Review time reduced</div>
+        <div class="d">From weeks of manual reading to minutes of decision-ready output.</div>
+      </div>
+      <div class="metric">
+        <div class="n" data-count="11">0</div>
+        <div class="l">Modules · one workspace</div>
+        <div class="d">No vendor sprawl. Every capability inside a single suite.</div>
+      </div>
+      <div class="metric">
+        <div class="n" data-count="18" data-suffix="+">0</div>
+        <div class="l">Document types supported</div>
+        <div class="d">Research, legal, financial, technical, policy, and enterprise archives.</div>
+      </div>
+      <div class="metric">
+        <div class="n" data-count="360" data-suffix="°">0</div>
+        <div class="l">Knowledge coverage</div>
+        <div class="d">Documents, entities, concepts, timelines, actions, and web signals.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span>Frequently Asked</span>
+        <h2 style="margin-top:18px;">Answers before <em style="font-style:italic; color:var(--ice); font-weight:300;">you ask.</em></h2>
+      </div>
+      <p class="reveal">
+        Quick clarity on what Nexora does, how it protects your knowledge, and how it fits into
+        the way your teams already work.
+      </p>
+    </div>
+    <div class="list reveal">
+      <details>
+        <summary>Is Nexora a chatbot?<span class="plus">+</span></summary>
+        <div class="a">No. Nexora is an end-to-end AI Document Intelligence Suite. Conversational AI is one of eleven modules — alongside knowledge graphs, semantic search, executive reports, action tracking, timelines, clusters, NLP, statistics, visual analytics, and web intelligence.</div>
+      </details>
+      <details>
+        <summary>What document types does Nexora support?<span class="plus">+</span></summary>
+        <div class="a">PDF, DOCX, TXT and enterprise archives including research papers, business reports, annual reports, policies, legal documents, technical manuals, contracts, financial documents, healthcare documentation, compliance material, meeting notes, corporate SOPs, whitepapers, and training material.</div>
+      </details>
+      <details>
+        <summary>How does Nexora handle grounding and hallucinations?<span class="plus">+</span></summary>
+        <div class="a">Every response is Retrieval-Augmented. Nexora retrieves the most relevant document chunks first, then generates grounded answers with cited evidence — reducing hallucinations and making every claim traceable to source.</div>
+      </details>
+      <details>
+        <summary>Can Nexora compare information across many documents?<span class="plus">+</span></summary>
+        <div class="a">Yes. Multi-Document Intelligence is a first-class capability. Nexora compares findings, identifies overlaps, detects contradictions, and merges scattered knowledge into unified insights across your entire collection.</div>
+      </details>
+      <details>
+        <summary>How does the Executive Report Generator work?<span class="plus">+</span></summary>
+        <div class="a">Nexora automatically produces structured executive reports summarizing key findings, business insights, critical observations, strategic recommendations, risks, opportunities, and supporting evidence — export-ready for leadership.</div>
+      </details>
+      <details>
+        <summary>What is Web Intelligence Enrichment (TrendLens)?<span class="plus">+</span></summary>
+        <div class="a">Nexora extends internal document knowledge with live external signals — news, research, industry trends, and market developments — identifying validation, contradictions, emerging trends, and missing context.</div>
+      </details>
+      <details>
+        <summary>Who is Nexora built for?<span class="plus">+</span></summary>
+        <div class="a">Enterprise teams, business analysts, researchers, consultants, legal teams, compliance officers, knowledge management, strategy teams, executives, healthcare, financial institutions, technology companies, government, and research organizations.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <!-- ================= CTA ================= -->
 <section class="cta" id="cta">
   <div class="storm" aria-hidden="true"><canvas id="storm-canvas"></canvas></div>
@@ -1379,6 +1713,117 @@
         const el = document.querySelector(id);
         if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
       }
+    });
+  });
+
+  /* ===========================================================
+     Scroll progress bar
+     =========================================================== */
+  const progress = document.getElementById('scroll-progress');
+  const onScroll = ()=>{
+    const s = window.scrollY;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const p = Math.max(0, Math.min(1, s/h));
+    progress.style.width = (p*100).toFixed(2)+'%';
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ===========================================================
+     Hero cursor spotlight
+     =========================================================== */
+  const hero = document.querySelector('.hero');
+  const spot = document.getElementById('hero-spotlight');
+  if(hero && spot){
+    hero.addEventListener('pointermove', (e)=>{
+      const r = hero.getBoundingClientRect();
+      const mx = ((e.clientX - r.left)/r.width)*100;
+      const my = ((e.clientY - r.top)/r.height)*100;
+      spot.style.setProperty('--mx', mx+'%');
+      spot.style.setProperty('--my', my+'%');
+    });
+  }
+
+  /* ===========================================================
+     Trust logos (fictional abstract enterprise marks)
+     =========================================================== */
+  const trustRow = document.getElementById('trust-row');
+  if(trustRow){
+    const logos = [
+      ['Halcyon', '<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="3" fill="currentColor"/>'],
+      ['Aeronaut', '<path d="M2 12l10-8 10 8-10 8-10-8z" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+      ['Verdant', '<path d="M12 3c4 4 6 8 6 12a6 6 0 11-12 0c0-4 2-8 6-12z" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+      ['Nordwell', '<rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 16l4-8 4 8" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+      ['Oakline', '<path d="M4 20L12 4l8 16H4z" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+      ['Meridian', '<path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+      ['Silica', '<path d="M12 3L3 8v8l9 5 9-5V8z" fill="none" stroke="currentColor" stroke-width="1.4"/>'],
+    ];
+    trustRow.innerHTML = logos.map(([name, svg])=>`
+      <a class="trust-logo" href="#" onclick="event.preventDefault();" data-testid="logo-${name.toLowerCase()}">
+        <svg viewBox="0 0 24 24">${svg}</svg>
+        <span>${name}</span>
+      </a>`).join('');
+  }
+
+  /* ===========================================================
+     Animated counters (testimonial metrics)
+     =========================================================== */
+  const counters = document.querySelectorAll('[data-count]');
+  const cio = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const el = en.target;
+        const target = parseInt(el.dataset.count,10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1400;
+        const start = performance.now();
+        const startVal = 0;
+        const tick = (now)=>{
+          const p = Math.min(1, (now-start)/duration);
+          const eased = 1 - Math.pow(1-p, 3);
+          const v = Math.round(startVal + (target-startVal)*eased);
+          el.textContent = v + suffix;
+          if(p<1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        cio.unobserve(el);
+      }
+    });
+  }, { threshold:.4 });
+  counters.forEach(c=>cio.observe(c));
+
+  /* ===========================================================
+     Capability card 3D tilt + glow
+     =========================================================== */
+  document.querySelectorAll('.cap').forEach(card=>{
+    const glow = document.createElement('div');
+    glow.className = 'cap-glow';
+    card.prepend(glow);
+    card.addEventListener('pointermove', (e)=>{
+      const r = card.getBoundingClientRect();
+      const cx = (e.clientX - r.left)/r.width - .5;
+      const cy = (e.clientY - r.top)/r.height - .5;
+      card.style.transform = `translateY(-4px) rotateX(${(-cy*4).toFixed(2)}deg) rotateY(${(cx*5).toFixed(2)}deg)`;
+      glow.style.setProperty('--gx', ((cx+.5)*100).toFixed(1)+'%');
+      glow.style.setProperty('--gy', ((cy+.5)*100).toFixed(1)+'%');
+    });
+    card.addEventListener('pointerleave', ()=>{
+      card.style.transform = '';
+    });
+  });
+
+  /* ===========================================================
+     Magnetic buttons
+     =========================================================== */
+  document.querySelectorAll('.btn').forEach(btn=>{
+    btn.addEventListener('pointermove', (e)=>{
+      const r = btn.getBoundingClientRect();
+      const mx = e.clientX - r.left - r.width/2;
+      const my = e.clientY - r.top - r.height/2;
+      btn.style.transform = `translate(${mx*0.15}px, ${my*0.2}px)`;
+    });
+    btn.addEventListener('pointerleave', ()=>{
+      btn.style.transform = '';
     });
   });
 
